@@ -22,8 +22,8 @@ class Offer(Base):
     id = Column(Integer, primary_key=True)
     name = Column(String)
     location = Column(String)
-    quantity = Column(Integer)
-    price = Column(Integer)
+    quantity = Column(String)
+    price = Column(String)
     
     def __repr__(self):
         return f'{self.id} {self.name} {self.location} {self.quantity} {self.price}'
