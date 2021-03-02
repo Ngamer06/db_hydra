@@ -60,7 +60,19 @@ def add_elem(name, category, shop, desc):
     session = Session()
 
     new_good = Good(name=name, category=category, shop=shop, description=desc)
-    session.add(new_good)
+
+    all_elem = []
+    goods_session = session.query(Good.name).all()
+
+    for good in goods_session:
+        all_elem.append(good.name)
+    
+    if str(name) in all_elem:
+        print(f'Repeat {name}')
+    else:
+        print(f'Add elem {name} {category} {shop} {desc}')
+        session.add(new_good)
+        
     session.commit()
 
     for good in session.query(Good):
@@ -73,7 +85,19 @@ def add_offer(name, location, quantity, price):
     session = Session()
         
     new_offer = Offer(name=name, location=location, quantity=quantity, price=price)
-    session.add(new_offer)
+    
+    all_offers = []
+    offers_session = session.query(Offer.name).all()
+
+    for offer in offers_session:
+        all_offers.append(offer.name)
+    
+    if str(name) in all_offers:
+        print(f'Repeat {name}')
+    else:
+        print(f'Add elem {name} {location} {quantity} {price}')
+        session.add(new_offer)
+        
     session.commit()
 
     for offer in session.query(Offer):
@@ -86,7 +110,19 @@ def add_shop(name, desc):
     session = Session()
         
     new_shop = Shop(name=name, description=desc)
-    session.add(new_shop)
+    
+    all_shop = []
+    shops_session = session.query(Shop.name).all()
+
+    for shop in shops_session:
+        all_shop.append(shop.name)
+    
+    if str(name) in all_shop:
+        print(f'Repeat {name}')
+    else:
+        print(f'Add elem {name} {desc}')
+        session.add(new_shop)
+        
     session.commit()
 
     for shop in session.query(Shop):
@@ -99,7 +135,19 @@ def add_review(shop_name, author, text, name_good, location):
     session = Session()
         
     new_review = Review(shop_name=shop_name, author=author, text=text, name_good=name_good, location=location)
-    session.add(new_review)
+    
+    all_review = []
+    reviews_session = session.query(Review.text).all()
+
+    for review in reviews_session:
+        all_review.append(review.text)
+    
+    if str(name) in all_review:
+        print(f'Repeat {name}')
+    else:
+        print(f'Add elem {shop_name} {author} {text} {name_good} {location}')
+        session.add(new_review)
+    
     session.commit()
 
     for review in session.query(Review):
