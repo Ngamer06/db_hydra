@@ -33,10 +33,9 @@ class Shop(Base):
     id = Column(Integer, primary_key=True)
     name = Column(String)
     description = Column(String)
-    reviews = Column(String)
 
     def __repr__(self):
-        return f'{self.id} {self.name} {self.description} {self.reviews}'
+        return f'{self.id} {self.name} {self.description}'
 
 class Review(Base):
     __tablename__ = 'reviews'
@@ -80,13 +79,13 @@ def add_offer(name, location, quantity, price):
     for offer in session.query(Offer):
         print(offer)
 
-def add_shop(name, desc, reviews):
+def add_shop(name, desc):
     engine = create_engine('postgres+psycopg2://postgres:1234@82.146.44.166:5432/postgres')
     Base.metadata.create_all(engine)
     Session = sessionmaker(bind=engine)
     session = Session()
         
-    new_shop = Shop(name=name, description=desc, reviews=reviews)
+    new_shop = Shop(name=name, description=desc)
     session.add(new_shop)
     session.commit()
 
